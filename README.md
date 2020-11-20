@@ -1,6 +1,6 @@
 # buefy-todo
 
-## Project setup
+## Project setup (Very important step)
 ```
 yarn install
 ```
