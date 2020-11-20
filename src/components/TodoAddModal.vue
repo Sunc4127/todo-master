@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-card">
+  <div class="modal-card" style="width: auto">
     <header class="modal-card-head">
       <p class="modal-card-title">Add Todo</p>
     </header>

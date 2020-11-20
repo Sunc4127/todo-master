@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-card">
+  <div class="modal-card" style="width: auto">
     <header class="modal-card-head">
       <p class="modal-card-title">Edit {{ todo.todo }}</p>
     </header>
@@ -13,7 +13,7 @@
         </b-field>
 
         <b-field>
-          <h3 class="title" style="margin-top: 70%">OR</h3>
+          <p class="title is-6" style="margin-top: 200%">OR</p>
         </b-field>
 
         <b-field label="Existing Project">
