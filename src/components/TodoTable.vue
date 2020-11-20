@@ -135,7 +135,7 @@ export default {
         if (this.filter == "all") {
           return this.todos.filter((todo) => todo.project == this.selectedProject);
         } else if (this.filter == "completed") {
-          return this.todos.filter((todo) => todo.project == this.selectedProject);
+          return this.todos.filter((todo) => todo.project == this.selectedProject && todo.status == "Complete");
         }
       }
       return this.todos;
@@ -215,6 +215,7 @@ export default {
             this.projectArray.push(this.todos[i].project);
           }
           console.log(this.projectArray);
+          this.projectArray = [...new Set(this.projectArray)];
 
           // save the updated array in localstorage
           this.saveLocalStorageTodos();
