@@ -78,8 +78,7 @@
               <b-button class="is-primary" @click="isAddModalActive = true"> Add A Todo </b-button>
             </div>
             <div class="column is-half">
-              <p align="right" > <b-button class="is-warning" @click="deleteAllTodos"> Delete All Todos </b-button></p>
-              
+              <p align="right"><b-button class="is-warning" @click="deleteAllTodos"> Delete All Todos </b-button></p>
             </div>
           </div>
         </div>
@@ -187,13 +186,13 @@ export default {
       todo.duedate = item.duedate;
       todo.status = item.status;
 
-      // Update project array 
-          // if all tasks in one project is deleted, delete that project array 
-          this.projectArray = [];
-          for (var i = 0; i < this.todos.length; i ++ ) {
-            this.projectArray.push(this.todos[i].project);
-          }
-          this.projectArray = [...new Set(this.projectArray)];
+      // Update project array
+      // if all tasks in one project is deleted, delete that project array
+      this.projectArray = [];
+      for (var i = 0; i < this.todos.length; i++) {
+        this.projectArray.push(this.todos[i].project);
+      }
+      this.projectArray = [...new Set(this.projectArray)];
 
       // save the updated array in localstorage
       this.saveLocalStorageTodos();
@@ -211,10 +210,10 @@ export default {
           // find in the array and remove
           const index = this.todos.indexOf(item);
           this.todos.splice(index, 1);
-          // Update project array 
-          // if all tasks in one project is deleted, delete that project array 
+          // Update project array
+          // if all tasks in one project is deleted, delete that project array
           this.projectArray = [];
-          for (var i = 0; i < this.todos.length; i ++ ) {
+          for (var i = 0; i < this.todos.length; i++) {
             this.projectArray.push(this.todos[i].project);
           }
           this.projectArray = [...new Set(this.projectArray)];
@@ -224,7 +223,7 @@ export default {
         },
       });
     },
-  
+
     deleteAllTodos() {
       this.$buefy.dialog.confirm({
         title: `Deleting Todos`,
