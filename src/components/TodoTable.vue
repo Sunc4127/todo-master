@@ -186,6 +186,15 @@ export default {
       todo.project = item.project;
       todo.duedate = item.duedate;
       todo.status = item.status;
+
+      // Update project array 
+          // if all tasks in one project is deleted, delete that project array 
+          this.projectArray = [];
+          for (var i = 0; i < this.todos.length; i ++ ) {
+            this.projectArray.push(this.todos[i].project);
+          }
+          this.projectArray = [...new Set(this.projectArray)];
+
       // save the updated array in localstorage
       this.saveLocalStorageTodos();
       // close the modal
@@ -202,19 +211,12 @@ export default {
           // find in the array and remove
           const index = this.todos.indexOf(item);
           this.todos.splice(index, 1);
-
-          console.log("todo is\n" + this.todos);
-          console.log("Previous project array is: \n"+this.projectArray);
           // Update project array 
           // if all tasks in one project is deleted, delete that project array 
           this.projectArray = [];
-          console.log(this.todos.length);
           for (var i = 0; i < this.todos.length; i ++ ) {
-            console.log("Here or not");
-            console.log(this.todos[i]);
             this.projectArray.push(this.todos[i].project);
           }
-          console.log(this.projectArray);
           this.projectArray = [...new Set(this.projectArray)];
 
           // save the updated array in localstorage
