@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-card" style="width: auto">
+  <div class="modal-card" style="width: auto" full-screen>
     <header class="modal-card-head">
       <p class="modal-card-title">Add Todo</p>
     </header>
@@ -17,7 +17,7 @@
         </b-field>
 
         <b-field label="Existing Project">
-          <b-select @change="changeItem($event)" placeholder="Select an existing Project" @input="changeItem($event)" expanded>
+          <b-select @input="changeItem($event)" placeholder="Project" expanded>
             <option v-for="item in this.projectArray" :value="item" :key="item">
               {{ item }}
             </option>
@@ -61,7 +61,7 @@ export default {
       status: null,
     };
   },
-
+  // Load local todos and project array
   mounted() {
     if (localStorage.getItem("projectArray")) {
       this.projectArray = JSON.parse(localStorage.getItem("projectArray"));

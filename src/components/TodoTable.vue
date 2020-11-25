@@ -28,10 +28,10 @@
           <div class="column">
             <div class="columns is-mobile">
               <div class="column">
-                <b-button class="is-light" :class="{ active: filter == 'all' }" @click="filter = 'all'">All Projects</b-button>
+                <b-button class="is-light" :class="{ active: filter === 'all' }" @click="filter = 'all'">All Projects</b-button>
               </div>
               <div class="column">
-                <b-button class="is-light" :class="{ active: filter == 'completed' }" @click="filter = 'completed'">Completed Projects</b-button>
+                <b-button class="is-light" :class="{ active: filter === 'completed' }" @click="filter = 'completed'">Completed Projects</b-button>
               </div>
             </div>
           </div>

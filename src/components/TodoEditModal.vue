@@ -4,7 +4,7 @@
       <p class="modal-card-title">Edit {{ todo.todo }}</p>
     </header>
     <section class="modal-card-body">
-      <b-field label="Task">
+      <b-field label="Task Name">
         <b-input type="text" v-model="name" placeholder="Your todo name"> </b-input>
       </b-field>
       <b-field grouped group-multiline>
@@ -17,7 +17,7 @@
         </b-field>
 
         <b-field label="Existing Project">
-          <b-select @change="changeItem($event)" placeholder="Select an existing Project" @input="changeItem($event)" expanded>
+          <b-select @input="changeItem($event)" placeholder="Project" expanded>
             <option v-for="item in this.projectArray" :value="item" :key="item">
               {{ item }}
             </option>
