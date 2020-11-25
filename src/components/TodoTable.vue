@@ -5,10 +5,7 @@
         <div class="columns">
           <div class="column is-full">
             <b-field>
-              <b-tooltip
-                label="view template code on GitHub"
-                position="is-right"
-              >
+              <b-tooltip label="view template code on GitHub" position="is-right">
                 <a href="https://github.com/Owlnofeathers/todo">
                   <h1 class="title">ToDo App</h1>
                 </a>
@@ -20,16 +17,9 @@
         <div class="columns">
           <div class="column">
             <b-field>
-              <b-select
-                @input="changeItem($event)"
-                placeholder="Select an existing Project"
-              >
+              <b-select @input="changeItem($event)" placeholder="Select an existing Project">
                 <option>All Projects</option>
-                <option
-                  v-for="item in this.projectArray"
-                  :value="item"
-                  :key="item"
-                >
+                <option v-for="item in this.projectArray" :value="item" :key="item">
                   {{ item }}
                 </option>
               </b-select>
@@ -38,20 +28,10 @@
           <div class="column">
             <div class="columns is-mobile">
               <div class="column">
-                <b-button
-                  class="is-light"
-                  :class="{ active: filter == 'all' }"
-                  @click="filter = 'all'"
-                  >All Projects</b-button
-                >
+                <b-button class="is-light" :class="{ active: filter == 'all' }" @click="filter = 'all'">All Projects</b-button>
               </div>
               <div class="column">
-                <b-button
-                  class="is-light"
-                  :class="{ active: filter == 'completed' }"
-                  @click="filter = 'completed'"
-                  >Completed Projects</b-button
-                >
+                <b-button class="is-light" :class="{ active: filter == 'completed' }" @click="filter = 'completed'">Completed Projects</b-button>
               </div>
             </div>
           </div>
@@ -63,11 +43,7 @@
             <b-table :data="todosFiltered" default-sort="duedate">
               <template slot-scope="todos">
                 <b-table-column field="todo" label="Todo Status">
-                  <b-checkbox
-                    v-model="todos.row.status"
-                    true-value="Complete"
-                    false-value="Ready"
-                  >
+                  <b-checkbox v-model="todos.row.status" true-value="Complete" false-value="Ready">
                     {{ todos.row.status }}
                   </b-checkbox>
                 </b-table-column>
@@ -81,26 +57,15 @@
                 </b-table-column>
 
                 <b-table-column field="duedate" label="Due Date" sortable>
-                  {{
-                    new Date(todos.row.duedate).toString().substring(0, 10) +
-                    new Date(todos.row.duedate).toString().substring(15, 21)
-                  }}
+                  {{ new Date(todos.row.duedate).toString().substring(0, 10) + new Date(todos.row.duedate).toString().substring(15, 21) }}
                 </b-table-column>
 
                 <b-table-column label="Edit">
-                  <b-button
-                    type="is-text"
-                    icon-left="settings-outline"
-                    @click="openEditModal(todos.row)"
-                  ></b-button>
+                  <b-button type="is-text" icon-left="settings-outline" @click="openEditModal(todos.row)"></b-button>
                 </b-table-column>
 
                 <b-table-column label="Delete">
-                  <b-button
-                    type="is-text"
-                    icon-left="delete"
-                    @click="deleteTodo(todos.row)"
-                  ></b-button>
+                  <b-button type="is-text" icon-left="delete" @click="deleteTodo(todos.row)"></b-button>
                 </b-table-column>
               </template>
             </b-table>
@@ -110,15 +75,11 @@
         <div class="column">
           <div class="columns">
             <div class="column is-half">
-              <b-button class="is-primary" @click="isAddModalActive = true">
-                Add A Todo
-              </b-button>
+              <b-button class="is-primary" @click="isAddModalActive = true"> Add A Todo </b-button>
             </div>
             <div class="column is-half">
               <p align="right">
-                <b-button class="is-warning" @click="deleteAllTodos">
-                  Delete All Todos
-                </b-button>
+                <b-button class="is-warning" @click="deleteAllTodos"> Delete All Todos </b-button>
               </p>
             </div>
           </div>
@@ -127,18 +88,11 @@
     </section>
 
     <b-modal :active.sync="isEditModalActive" has-modal-card>
-      <todo-edit-modal
-        :todo="selectedTodo"
-        :statuses="statuses"
-        @edit-todo="onEditTodo"
-      ></todo-edit-modal>
+      <todo-edit-modal :todo="selectedTodo" :statuses="statuses" @edit-todo="onEditTodo"></todo-edit-modal>
     </b-modal>
 
     <b-modal :active.sync="isAddModalActive" has-modal-card>
-      <todo-add-modal
-        @add-todo="onAddTodo"
-        :statuses="statuses"
-      ></todo-add-modal>
+      <todo-add-modal @add-todo="onAddTodo" :statuses="statuses"></todo-add-modal>
     </b-modal>
   </div>
 </template>
@@ -171,28 +125,27 @@ export default {
     };
   },
   computed: {
+    // Filter the task table based on selected project and filter
     todosFiltered() {
-      if (this.selectedProject == "All Projects") {
-        if (this.filter == "all") {
+      // Filter tasks of all projects; otherwise filter tasks of individual project
+      if (this.selectedProject === "All Projects") {
+        if (this.filter === "all") {
           return this.todos;
-        } else if (this.filter == "completed") {
-          return this.todos.filter((todo) => todo.status == "Complete");
+        } else if (this.filter === "completed") {
+          return this.todos.filter((todo) => todo.status === "Complete");
         }
       } else {
-        if (this.filter == "all") {
-          return this.todos.filter(
-            (todo) => todo.project == this.selectedProject
-          );
-        } else if (this.filter == "completed") {
-          return this.todos.filter(
-            (todo) =>
-              todo.project == this.selectedProject && todo.status == "Complete"
-          );
+        if (this.filter === "all") {
+          return this.todos.filter((todo) => todo.project === this.selectedProject);
+        } else if (this.filter === "completed") {
+          return this.todos.filter((todo) => todo.project === this.selectedProject && todo.status === "Complete");
         }
       }
       return this.todos;
     },
   },
+
+  // Load local todos and project array
   mounted() {
     if (localStorage.getItem("todos")) {
       this.todos = JSON.parse(localStorage.getItem("todos"));
@@ -271,7 +224,7 @@ export default {
           }
           this.projectArray = [...new Set(this.projectArray)];
 
-          // save the updated array in localstorage
+          // save the updated array in local storage
           this.saveLocalStorageTodos();
         },
       });
@@ -287,7 +240,7 @@ export default {
         onConfirm: () => {
           this.todos = [];
           this.projectArray = [];
-          // save the updated array in localstorage
+          // save the updated array in local storage
           this.saveLocalStorageTodos();
         },
       });
