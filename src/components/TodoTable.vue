@@ -28,10 +28,10 @@
           <div class="column">
             <div class="columns is-mobile">
               <div class="column">
-                <b-button class="is-light" :class="{ active: filter === 'all' }" @click="filter = 'all'">All Projects</b-button>
+                <b-button class="is-light" :class="{ active: filter === 'all' }" @click="filter = 'all'">All Tasks</b-button>
               </div>
               <div class="column">
-                <b-button class="is-light" :class="{ active: filter === 'completed' }" @click="filter = 'completed'">Completed Projects</b-button>
+                <b-button class="is-light" :class="{ active: filter === 'completed' }" @click="filter = 'completed'">Completed Tasks</b-button>
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@
             <b-table :data="todosFiltered" default-sort="duedate">
               <template slot-scope="todos">
                 <b-table-column field="todo" label="Todo Status">
-                  <b-checkbox v-model="todos.row.status" true-value="Complete" false-value="Ready">
+                  <b-checkbox v-model="todos.row.status" @input="changeStatus()" true-value="Complete" false-value="Ready">
                     {{ todos.row.status }}
                   </b-checkbox>
                 </b-table-column>
@@ -247,6 +247,9 @@ export default {
     },
     changeItem(event) {
       this.selectedProject = event;
+    },
+    changeStatus() {
+      this.saveLocalStorageTodos();
     },
     findTodo(item) {
       return this.todos.find((todo) => todo.id === item.id);
